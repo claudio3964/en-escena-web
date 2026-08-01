@@ -7,7 +7,7 @@ const navLinks = [
   { href: '/', label: 'Inicio' },
   { href: '/servicios', label: 'Servicios' },
   { href: '/portfolio', label: 'Portfolio' },
-  { href: '/sobre-nosotras', label: 'Sobre nosotras' },
+  { href: '/sobre-nosotras', label: 'Nosotras' },
   { href: '/blog', label: 'Blog' },
   { href: '/contacto', label: 'Contacto' },
 ]
@@ -16,10 +16,10 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-brand-100">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-medium tracking-tight">
+          <Link href="/" className="text-lg font-medium tracking-tight text-brand-900">
             En Escena
           </Link>
 
@@ -28,7 +28,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm text-brand-600 hover:text-brand-900 transition-colors"
+                className="text-sm text-brand-500 hover:text-brand-900 transition-colors"
               >
                 {link.label}
               </Link>
@@ -37,13 +37,13 @@ export default function Header() {
 
           <Link
             href="/contacto"
-            className="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-brand-900 rounded-lg hover:bg-brand-700 transition-colors"
+            className="hidden md:inline-flex items-center px-5 py-2 text-sm font-medium text-white bg-brand-900 rounded-full hover:bg-brand-700 transition-colors"
           >
             Contratar
           </Link>
 
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 text-brand-900"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Menú"
           >
@@ -59,13 +59,13 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden border-t border-brand-100 bg-white">
+        <div className="md:hidden bg-white border-t border-brand-100 shadow-lg">
           <nav className="flex flex-col px-4 py-4 gap-3">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm text-brand-600 hover:text-brand-900 py-1"
+                className="text-sm text-brand-600 hover:text-brand-900 py-2"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
@@ -73,7 +73,7 @@ export default function Header() {
             ))}
             <Link
               href="/contacto"
-              className="mt-2 inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-brand-900 rounded-lg"
+              className="mt-2 inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-brand-900 rounded-full"
               onClick={() => setMobileOpen(false)}
             >
               Contratar

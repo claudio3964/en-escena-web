@@ -6,8 +6,8 @@ export const metadata: Metadata = {
     default: 'En Escena | Marketing Digital, Fotografía y Video',
     template: '%s | En Escena',
   },
-  description: 'Agencia creativa especializada en marketing digital, fotografía de producto, video, reels, diseño gráfico y dirección de arte.',
-  keywords: ['marketing digital', 'fotografía', 'video', 'reels', 'diseño gráfico', 'dirección de arte', 'Uruguay'],
+  description: 'Agencia creativa uruguaya especializada en marketing digital, fotografía de producto, video, reels, diseño gráfico y dirección de arte.',
+  keywords: ['marketing digital', 'fotografía', 'video', 'reels', 'diseño gráfico', 'dirección de arte', 'Uruguay', 'agencia creativa'],
   authors: [{ name: 'En Escena' }],
   openGraph: {
     type: 'website',
@@ -15,12 +15,12 @@ export const metadata: Metadata = {
     url: 'https://enescena.uy',
     siteName: 'En Escena',
     title: 'En Escena | Marketing Digital, Fotografía y Video',
-    description: 'Agencia creativa especializada en marketing digital, fotografía de producto, video, reels y diseño gráfico.',
+    description: 'Agencia creativa uruguaya especializada en marketing digital, fotografía de producto, video, reels y diseño gráfico.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'En Escena | Marketing Digital, Fotografía y Video',
-    description: 'Agencia creativa especializada en marketing digital, fotografía de producto, video, reels y diseño gráfico.',
+    description: 'Agencia creativa uruguaya especializada en marketing digital, fotografía de producto, video, reels y diseño gráfico.',
   },
   robots: {
     index: true,
@@ -35,7 +35,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col bg-white">
         {children}
       </body>
     </html>

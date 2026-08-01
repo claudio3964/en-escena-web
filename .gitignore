@@ -30,3 +30,10 @@ yarn-error.log*
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Next.js build
+.next/
+
+# Local env files
+.env.local
+.env.*.local
