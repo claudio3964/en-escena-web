@@ -1,29 +1,37 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import Hero from '@/components/Hero'
 import ServiciosGrid from '@/components/ServiciosGrid'
-import type { Metadata } from 'next'
+import Equipo from '@/components/Equipo'
+import ScrollVisual from '@/components/ScrollVisual'
 
-export const metadata: Metadata = {
-  title: 'Servicios',
-  description: 'Descubre todos los servicios de En Escena: fotografía, video, reels, diseño gráfico y marketing digital para marcas uruguayas.',
-}
-
-export default function ServiciosPage() {
+export default function Home() {
   return (
     <>
       <Header />
-      <main className="pt-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center mb-12">
-            <p className="text-sm tracking-[0.2em] uppercase text-brand-400 mb-3">Qué hacemos</p>
-            <h1 className="text-3xl md:text-4xl font-medium text-brand-900">Nuestros servicios</h1>
-            <p className="mt-4 text-brand-500 max-w-2xl mx-auto">
-              Cada proyecto es una oportunidad de crear algo extraordinario. Elegí el servicio que necesitás o armamos un paquete a medida.
-            </p>
+
+      <main>
+        <ScrollVisual>
+          <Hero />
+
+          <ServiciosGrid />
+
+          <Equipo />
+
+          <div className="min-h-screen flex items-center justify-center">
+            <div className="text-center text-white">
+              <p className="text-sm tracking-[0.2em] uppercase text-white/60">
+                Nuestra mirada
+              </p>
+
+              <h2 className="mt-3 text-3xl md:text-5xl font-medium">
+                Creamos imágenes que cuentan historias
+              </h2>
+            </div>
           </div>
-        </div>
-        <ServiciosGrid />
+        </ScrollVisual>
       </main>
+
       <Footer />
     </>
   )
