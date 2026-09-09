@@ -34,13 +34,6 @@ export default function Hero() {
           </Link>
         </div>
 
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-8 flex flex-col items-center gap-2">
-          <span className="text-xs text-white/50 tracking-widest uppercase">
-            Scroll
-          </span>
-
-          <div className="w-px h-8 bg-white/30 animate-bounce" />
-        </div>
       </div>
     </section>
   )
