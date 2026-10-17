@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import MotionProvider from '@/components/motion/MotionProvider'
+import WhatsAppButton from '@/components/WhatsAppButton'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://enescena.uy'),
@@ -38,7 +39,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="min-h-screen flex flex-col bg-white">
-        <MotionProvider>{children}</MotionProvider>
+        <MotionProvider>
+          {children}
+          <WhatsAppButton />
+        </MotionProvider>
       </body>
     </html>
   )

@@ -71,7 +71,7 @@ export default async function ServicioPage({ params }: Props) {
               </MotionLink>
               {site.whatsapp.enabled && (
                 <a
-                  href={whatsappUrl(`Hola En Escena! Quiero consultar por ${servicio.title.toLowerCase()}.`)}
+                  href={whatsappUrl(`¡Hola En Escena! Quisiera pedir un presupuesto de ${servicio.title.toLowerCase()} para mi proyecto.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-8 py-3.5 text-base font-medium text-white border border-white/30 rounded-full hover:bg-white/10 transition-colors"

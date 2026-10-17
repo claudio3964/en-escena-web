@@ -1,7 +1,10 @@
-// Datos de contacto centralizados. El número de WhatsApp se configura con
-// NEXT_PUBLIC_WHATSAPP_NUMBER en formato internacional, solo dígitos (ej: 59899123456).
+// Datos de contacto centralizados. El número de WhatsApp oficial es 098 313 196;
+// se puede sobrescribir con NEXT_PUBLIC_WHATSAPP_NUMBER (formato internacional, solo dígitos).
 
-const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '').replace(/\D/g, '')
+const WHATSAPP_OFICIAL = '59898313196'
+const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || WHATSAPP_OFICIAL).replace(/\D/g, '')
+
+export const WHATSAPP_MENSAJE = '¡Hola En Escena! Quisiera pedir un presupuesto para mi proyecto.'
 
 export const site = {
   name: 'En Escena',
@@ -17,7 +20,7 @@ export const site = {
 }
 
 /** Link de WhatsApp con mensaje precargado. Si no hay número configurado, cae al formulario. */
-export function whatsappUrl(message = 'Hola En Escena! Quiero consultar por un proyecto.') {
+export function whatsappUrl(message = WHATSAPP_MENSAJE) {
   if (!site.whatsapp.enabled) return '/contacto'
   return `https://wa.me/${site.whatsapp.number}?text=${encodeURIComponent(message)}`
 }

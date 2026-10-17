@@ -104,11 +104,14 @@ export async function POST(request: NextRequest) {
     ? 'Pack completo'
     : getServicio(servicioSlug)?.title ?? 'No especificado'
 
+  // Solo RESEND_API_KEY es obligatoria. Destino y remitente tienen valores por defecto:
+  // - onboarding@resend.dev funciona sin dominio verificado, pero Resend solo entrega a la
+  //   casilla dueña de la cuenta. Con un dominio verificado, configurar CONTACT_FROM_EMAIL.
   const apiKey = process.env.RESEND_API_KEY
-  const from = process.env.CONTACT_FROM_EMAIL
-  const to = process.env.CONTACT_TO_EMAIL
-  if (!apiKey || !from || !to) {
-    console.error('[contacto] Faltan RESEND_API_KEY, CONTACT_FROM_EMAIL o CONTACT_TO_EMAIL')
+  const from = process.env.CONTACT_FROM_EMAIL || 'En Escena Web <onboarding@resend.dev>'
+  const to = process.env.CONTACT_TO_EMAIL || 'enescena.estudiocreativo@gmail.com'
+  if (!apiKey) {
+    console.error('[contacto] Falta RESEND_API_KEY')
     return NextResponse.json(
       { error: 'El formulario no está disponible en este momento. Escribinos por email o WhatsApp.' },
       { status: 503 },
