@@ -1,6 +1,7 @@
 'use client'
 
-import { motion, useReducedMotion, type Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { cardHoverClass, cardReveal } from '@/lib/motion'
 
 const medios = [
   {
@@ -26,21 +27,7 @@ const medios = [
   },
 ]
 
-const ease = [0.22, 1, 0.36, 1] as const
-
-const container: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
-}
-
-const item: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
-}
-
 export default function MediosDePago() {
-  const reduceMotion = useReducedMotion()
-
   return (
     <section aria-labelledby="medios-de-pago" className="py-20 md:py-24 bg-brand-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,20 +41,12 @@ export default function MediosDePago() {
           </p>
         </div>
 
-        <motion.ul
-          variants={container}
-          initial={reduceMotion ? false : 'hidden'}
-          whileInView="show"
-          viewport={{ once: true, margin: '-80px' }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-        >
-          {medios.map((medio) => (
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {medios.map((medio, index) => (
             <motion.li
               key={medio.title}
-              variants={item}
-              whileHover={reduceMotion ? undefined : { y: -6 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-              className="group p-8 bg-white rounded-2xl border border-brand-100 hover:border-brand-300 hover:shadow-xl transition-[border-color,box-shadow] duration-300"
+              {...cardReveal(index, 0.12)}
+              className={`group p-8 bg-white rounded-2xl border border-brand-100 hover:border-brand-300 hover:shadow-xl ${cardHoverClass}`}
             >
               <div className="w-12 h-12 rounded-full bg-brand-900 text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" aria-hidden="true">
@@ -78,7 +57,7 @@ export default function MediosDePago() {
               <p className="mt-2 text-sm text-brand-500 leading-relaxed">{medio.desc}</p>
             </motion.li>
           ))}
-        </motion.ul>
+        </ul>
       </div>
     </section>
   )

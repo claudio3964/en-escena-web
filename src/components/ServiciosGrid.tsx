@@ -1,4 +1,4 @@
-import { Reveal, Stagger } from '@/components/motion/Reveal'
+import { Reveal } from '@/components/motion/Reveal'
 import SpotlightCard from '@/components/motion/SpotlightCard'
 import { servicios } from '@/lib/servicios'
 
@@ -41,13 +41,14 @@ export default function ServiciosGrid({ variant = 'light' }: { variant?: 'light'
             Cada proyecto es una oportunidad de crear algo extraordinario. Elegí el servicio que necesitás o armamos un paquete a medida.
           </p>
         </Reveal>
-        <Stagger gap={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {servicios.map((servicio) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {servicios.map((servicio, index) => (
             <SpotlightCard
               key={servicio.slug}
+              index={index}
               href={`/servicios/${servicio.slug}`}
               glow={s.glow}
-              className={`p-8 rounded-2xl border transition-[border-color,box-shadow] duration-300 ${s.card}`}
+              className={`p-8 rounded-2xl border ${s.card}`}
             >
               <h3 className={`text-lg font-medium ${s.cardTitle}`}>{servicio.title}</h3>
               <p className={`mt-3 text-sm leading-relaxed ${s.cardText}`}>{servicio.desc}</p>
@@ -68,7 +69,7 @@ export default function ServiciosGrid({ variant = 'light' }: { variant?: 'light'
               </span>
             </SpotlightCard>
           ))}
-        </Stagger>
+        </div>
       </div>
     </section>
   )

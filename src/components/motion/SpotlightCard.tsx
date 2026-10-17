@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion'
-import { fadeUp, springSoft } from '@/lib/motion'
+import { cardHoverClass, cardReveal } from '@/lib/motion'
 
 const MotionNextLink = motion.create(Link)
 
@@ -10,14 +10,17 @@ type SpotlightCardProps = Omit<React.ComponentProps<typeof MotionNextLink>, 'chi
   children: React.ReactNode
   /** Color del halo que sigue al cursor */
   glow?: string
+  /** Posición en la grilla, para escalonar la entrada */
+  index?: number
 }
 
 /**
  * Tarjeta-link con halo de luz que sigue al cursor y leve elevación al hover.
- * Pensada para usarse dentro de <Stagger> (hereda la variante fadeUp).
+ * Maneja su propia entrada al hacer scroll (no depende de variantes del contenedor).
  */
 export default function SpotlightCard({
   glow = 'rgba(255,255,255,0.12)',
+  index = 0,
   className,
   children,
   ...props
@@ -36,12 +39,9 @@ export default function SpotlightCard({
   return (
     <MotionNextLink
       {...props}
-      variants={fadeUp}
-      whileHover={{ y: -6 }}
-      whileTap={{ scale: 0.985 }}
-      transition={springSoft}
+      {...cardReveal(index)}
       onPointerMove={handleMove}
-      className={`group relative overflow-hidden ${className ?? ''}`}
+      className={`group relative overflow-hidden ${cardHoverClass} ${className ?? ''}`}
     >
       <motion.span
         aria-hidden="true"

@@ -179,19 +179,20 @@ export default async function ServicioPage({ params }: Props) {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 text-left">
             <p className="text-sm tracking-[0.2em] uppercase text-brand-400 mb-6">Otros servicios</p>
-            <Stagger gap={0.08} className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {otros.map((otro) => (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {otros.map((otro, index) => (
                 <SpotlightCard
                   key={otro.slug}
+                  index={index}
                   href={`/servicios/${otro.slug}`}
                   glow="rgba(18,18,18,0.06)"
-                  className="p-6 rounded-2xl border border-brand-100 hover:border-brand-300 hover:shadow-lg transition-[border-color,box-shadow] duration-300"
+                  className="p-6 rounded-2xl border border-brand-100 hover:border-brand-300 hover:shadow-lg"
                 >
                   <h3 className="font-medium text-brand-900">{otro.title}</h3>
                   <p className="mt-2 text-sm text-brand-500 line-clamp-2">{otro.desc}</p>
                 </SpotlightCard>
               ))}
-            </Stagger>
+            </div>
           </div>
         </section>
       </main>
