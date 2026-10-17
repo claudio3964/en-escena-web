@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import FadeToDark from '@/components/FadeToDark'
 import MediosDePago from '@/components/MediosDePago'
 import MotionLink from '@/components/motion/MotionLink'
 import ParallaxImage from '@/components/motion/ParallaxImage'
@@ -163,6 +164,7 @@ export default async function ServicioPage({ params }: Props) {
           </div>
         </section>
 
+        <FadeToDark />
         <MediosDePago />
 
         {/* CTA final */}

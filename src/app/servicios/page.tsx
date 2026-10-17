@@ -3,6 +3,7 @@ import { pageMetadata } from '@/lib/seo'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ServiciosGrid from '@/components/ServiciosGrid'
+import FadeToDark from '@/components/FadeToDark'
 import MediosDePago from '@/components/MediosDePago'
 import MotionLink from '@/components/motion/MotionLink'
 import { Reveal } from '@/components/motion/Reveal'
@@ -20,6 +21,9 @@ export default function ServiciosPage() {
       <Header />
       <main className="pt-16">
         <ServiciosGrid headingAs="h1" />
+
+        {/* La grilla clara termina en to-amber-50/40 (lightSectionBg) sobre blanco */}
+        <FadeToDark from="color-mix(in srgb, var(--color-amber-50) 40%, #ffffff)" />
 
         <MediosDePago />
 

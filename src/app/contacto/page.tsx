@@ -3,6 +3,7 @@ import { pageMetadata } from '@/lib/seo'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ContactForm from '@/components/ContactForm'
+import FadeToDark from '@/components/FadeToDark'
 import MediosDePago from '@/components/MediosDePago'
 import { getServicio } from '@/lib/servicios'
 import { site, whatsappDisplay, whatsappUrl } from '@/lib/site'
@@ -87,6 +88,7 @@ export default async function ContactoPage({
             </Reveal>
           </div>
         </div>
+        <FadeToDark />
         <MediosDePago />
       </main>
       <Footer />
