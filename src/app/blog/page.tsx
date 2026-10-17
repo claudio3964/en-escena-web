@@ -1,6 +1,11 @@
+import type { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import type { Metadata } from 'next'
+import { Reveal } from '@/components/motion/Reveal'
+import { formatDate, posts, readingTime, type BlogPost } from '@/lib/blog'
+import { cardText, colorBlobs, glassCard, lightSectionBg } from '@/lib/cardStyles'
 import { pageMetadata } from '@/lib/seo'
 
 export const metadata: Metadata = pageMetadata({
@@ -10,75 +15,95 @@ export const metadata: Metadata = pageMetadata({
   path: '/blog',
 })
 
-const posts = [
-  {
-    slug: 'como-hacer-reels-para-restaurantes',
-    titulo: 'Cómo hacer reels para restaurantes que vendan',
-    extracto: 'Estrategias de guión, filmación y edición para crear contenido gastronómico que convierta seguidores en clientes.',
-    categoria: 'Video',
-    fecha: '2026-07-15',
-  },
-  {
-    slug: 'fotografia-producto-vs-lifestyle',
-    titulo: 'Fotografía de producto vs lifestyle: cuál elegir',
-    extracto: 'Diferencias clave entre ambos estilos y cómo decidir cuál se adapta mejor a tu marca y presupuesto.',
-    categoria: 'Fotografía',
-    fecha: '2026-07-08',
-  },
-  {
-    slug: 'identidad-visual-marca',
-    titulo: 'Por qué tu marca necesita una identidad visual sólida',
-    extracto: 'Más allá del logo: cómo un sistema visual coherente genera confianza y reconocimiento en tu audiencia.',
-    categoria: 'Diseño',
-    fecha: '2026-06-28',
-  },
-]
+function PostMeta({ post }: { post: BlogPost }) {
+  return (
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-brand-500">
+      <span className="rounded-full bg-brand-900 px-3 py-1 font-medium text-amber-100">{post.categoria}</span>
+      <time dateTime={post.fecha}>{formatDate(post.fecha)}</time>
+      <span aria-hidden="true">·</span>
+      <span>{readingTime(post)} min de lectura</span>
+    </div>
+  )
+}
 
 export default function BlogPage() {
+  const [destacado, ...resto] = [...posts].sort((a, b) => b.fecha.localeCompare(a.fecha))
+
   return (
     <>
       <Header />
-      <main className="pt-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center mb-16">
-            <p className="text-sm tracking-[0.2em] uppercase text-brand-400 mb-3">Recursos</p>
-            <h1 className="text-3xl md:text-4xl font-medium text-brand-900">Blog</h1>
-            <p className="mt-4 text-brand-500 max-w-2xl mx-auto">
-              Conocimiento práctico sobre fotografía, video, diseño y marketing digital.
-            </p>
-          </div>
+      <main className={`relative isolate overflow-clip pt-24 ${lightSectionBg}`}>
+        <div aria-hidden="true" className={`${colorBlobs.light.amber} -left-24 top-40`} />
+        <div aria-hidden="true" className={`${colorBlobs.light.purple} -right-28 top-[40rem]`} />
 
-          <div className="space-y-8">
-            {posts.map((post) => (
-              <article
-                key={post.slug}
-                className="group p-8 bg-white rounded-2xl border border-brand-100 hover:border-brand-300 hover:shadow-lg transition-all duration-300"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-xs font-medium px-3 py-1 rounded-full bg-brand-100 text-brand-700">
-                    {post.categoria}
-                  </span>
-                  <span className="text-xs text-brand-400">{post.fecha}</span>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+          <Reveal className="text-center mb-14 md:mb-20">
+            <p className="text-sm tracking-[0.2em] uppercase text-brand-400 mb-3">Blog</p>
+            <h1 className="text-4xl md:text-5xl font-medium tracking-tight text-brand-900">Ideas para marcas que quieren destacar</h1>
+            <p className="mt-5 text-lg text-brand-500 max-w-2xl mx-auto">
+              Video, diseño y redes sociales desde la mirada de un estudio creativo uruguayo.
+            </p>
+          </Reveal>
+
+          {/* Artículo destacado */}
+          <Link
+            href={`/blog/${destacado.slug}`}
+            className={`grid md:grid-cols-2 ${glassCard.light}`}
+          >
+            <div className="relative aspect-[16/10] md:aspect-auto md:min-h-80 overflow-hidden">
+              <Image
+                src={destacado.cover}
+                alt={destacado.coverAlt}
+                fill
+                preload
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover transition-[scale] duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-interact:scale-105"
+              />
+            </div>
+            <div className="flex flex-col justify-center p-8 md:p-12">
+              <PostMeta post={destacado} />
+              <h2 className="mt-5 text-2xl md:text-3xl font-medium tracking-tight text-brand-900">{destacado.titulo}</h2>
+              <p className={`mt-4 ${cardText.light.body} text-base`}>{destacado.extracto}</p>
+              <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-brand-900">
+                Leer artículo
+                <span aria-hidden="true" className="transition-[translate] duration-500 group-interact:translate-x-1">→</span>
+              </span>
+            </div>
+          </Link>
+
+          {/* Resto de los artículos */}
+          <div className="mt-8 grid gap-8 md:grid-cols-2">
+            {resto.map((post) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`} className={`flex flex-col ${glassCard.light}`}>
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <Image
+                    src={post.cover}
+                    alt={post.coverAlt}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover transition-[scale] duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-interact:scale-105"
+                  />
                 </div>
-                <h2 className="text-xl font-medium text-brand-900 group-hover:text-brand-700 transition-colors">
-                  {post.titulo}
-                </h2>
-                <p className="mt-3 text-brand-500 leading-relaxed">{post.extracto}</p>
-                <div className="mt-4">
-                  <span className="text-sm font-medium text-brand-900 group-hover:underline cursor-pointer">
-                    Leer artículo →
+                <div className="flex flex-1 flex-col p-8">
+                  <PostMeta post={post} />
+                  <h2 className={`mt-5 ${cardText.light.title} text-xl`}>{post.titulo}</h2>
+                  <p className={`mt-3 ${cardText.light.body}`}>{post.extracto}</p>
+                  <span className="mt-auto pt-6 inline-flex items-center gap-2 text-sm font-medium text-brand-900">
+                    Leer artículo
+                    <span aria-hidden="true" className="transition-[translate] duration-500 group-interact:translate-x-1">→</span>
                   </span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
 
-          <div className="mt-16 text-center">
-            <p className="text-brand-400 text-sm">
-              ¿Tenés un tema que te gustaría que tratemos?{' '}
-              <a href="/contacto" className="text-brand-900 underline hover:no-underline">Escribinos</a>.
-            </p>
-          </div>
+          <p className="mt-16 text-center text-sm text-brand-500">
+            ¿Tenés un tema que te gustaría que tratemos?{' '}
+            <Link href="/contacto" className="text-brand-900 underline underline-offset-4 hover:no-underline">
+              Escribinos
+            </Link>
+            .
+          </p>
         </div>
       </main>
       <Footer />

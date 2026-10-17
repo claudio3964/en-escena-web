@@ -13,6 +13,8 @@ type PageSeo = {
    * archivo opengraph-image (ej: /servicios/[slug]) pasan false.
    */
   defaultImage?: boolean
+  /** Para artículos del blog: og:type "article" con fecha y sección */
+  article?: { publishedTime: string; section: string; authors: string[] }
 }
 
 const defaultOgImage = { url: '/opengraph-image', width: 1200, height: 630, alt: 'En Escena, agencia audiovisual y estudio creativo en Uruguay' }
@@ -21,7 +23,7 @@ const defaultOgImage = { url: '/opengraph-image', width: 1200, height: 630, alt:
  * Metadatos consistentes por página: canonical, OpenGraph y Twitter Card.
  * Las imágenes de vista previa salen de los archivos opengraph-image / twitter-image.
  */
-export function pageMetadata({ title, description, path, defaultImage = true }: PageSeo): Metadata {
+export function pageMetadata({ title, description, path, defaultImage = true, article }: PageSeo): Metadata {
   const fullTitle = `${title} | ${site.name}`
 
   return {
@@ -29,7 +31,7 @@ export function pageMetadata({ title, description, path, defaultImage = true }: 
     description,
     alternates: { canonical: path },
     openGraph: {
-      type: 'website',
+      ...(article ? { type: 'article', ...article } : { type: 'website' }),
       locale: 'es_UY',
       siteName: site.name,
       url: path,
