@@ -20,7 +20,7 @@ export default function ServiciosPage() {
 
         <MediosDePago />
 
-        <section className="py-20 md:py-24 bg-brand-900 text-white text-center">
+        <section className="py-20 md:py-24 bg-brand-900 text-white text-center border-t border-white/10">
           <Reveal className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl md:text-4xl font-medium">¿No sabés qué servicio necesitás?</h2>
             <p className="mt-4 text-white/70">

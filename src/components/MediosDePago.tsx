@@ -1,4 +1,4 @@
-import { colorBlobs, glassCard, iconBubble } from '@/lib/cardStyles'
+import { cardText, colorBlobs, glassCard, iconBubble } from '@/lib/cardStyles'
 
 const medios = [
   {
@@ -18,33 +18,40 @@ const medios = [
   },
 ]
 
+const t = cardText.dark
+
 export default function MediosDePago() {
   return (
-    <section aria-labelledby="medios-de-pago" className="relative isolate overflow-clip py-20 md:py-24 bg-brand-50">
-      <div aria-hidden="true" className={`${colorBlobs.amber} left-[8%] top-24`} />
-      <div aria-hidden="true" className={`${colorBlobs.purple} right-[6%] bottom-0`} />
+    <section aria-labelledby="medios-de-pago" className="relative isolate overflow-clip py-20 md:py-28 bg-brand-900">
+      <div aria-hidden="true" className={`${colorBlobs.dark.amber} -left-20 top-10`} />
+      <div aria-hidden="true" className={`${colorBlobs.dark.purple} -right-24 -bottom-24`} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <p className="text-sm tracking-[0.2em] uppercase text-brand-400 mb-3">Medios de pago</p>
-          <h2 id="medios-de-pago" className="text-3xl md:text-4xl font-medium text-brand-900">
+        <div className="text-center mb-14">
+          <p className="text-sm tracking-[0.2em] uppercase text-white/50 mb-3">Medios de pago</p>
+          <h2 id="medios-de-pago" className="text-3xl md:text-4xl font-medium tracking-tight text-white">
             Pagá como te quede más cómodo
           </h2>
-          <p className="mt-4 text-brand-500 max-w-2xl mx-auto">
+          <p className="mt-4 text-white/60 max-w-2xl mx-auto">
             Presupuesto cerrado, sin sorpresas. Coordinamos el pago al confirmar la propuesta.
           </p>
         </div>
 
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {medios.map((medio) => (
-            <li key={medio.title} className={`p-8 ${glassCard.light}`}>
-              <span className={iconBubble.light}>
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d={medio.icon} />
-                </svg>
-              </span>
-              <h3 className="mt-6 text-lg font-medium text-brand-900">{medio.title}</h3>
-              <p className="mt-2 text-sm text-brand-500 leading-relaxed">{medio.desc}</p>
+          {medios.map((medio, index) => (
+            <li key={medio.title} className={`flex flex-col p-8 ${glassCard.dark}`}>
+              <div className="flex items-start justify-between">
+                <span className={iconBubble.dark}>
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d={medio.icon} />
+                  </svg>
+                </span>
+                <span aria-hidden="true" className={t.index}>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+              </div>
+              <h3 className={`mt-8 ${t.title}`}>{medio.title}</h3>
+              <p className={`mt-2 ${t.body}`}>{medio.desc}</p>
             </li>
           ))}
         </ul>

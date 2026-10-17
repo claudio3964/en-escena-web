@@ -1,6 +1,6 @@
 import { Reveal } from '@/components/motion/Reveal'
 import SpotlightCard from '@/components/motion/SpotlightCard'
-import { colorBlobs, glassCard, iconBubble } from '@/lib/cardStyles'
+import { cardText, colorBlobs, glassCard, iconBubble, lightSectionBg } from '@/lib/cardStyles'
 import { servicios } from '@/lib/servicios'
 
 // Íconos de línea (24x24) por servicio
@@ -21,10 +21,9 @@ const styles = {
     lead: 'text-brand-500',
     card: glassCard.light,
     icon: iconBubble.light,
-    glow: 'rgba(245,158,11,0.10)',
-    cardTitle: 'text-brand-900',
-    cardText: 'text-brand-500',
-    tag: 'bg-brand-900/5 text-brand-700 ring-1 ring-brand-900/10',
+    glow: 'rgba(245,158,11,0.08)',
+    text: cardText.light,
+    tag: 'bg-white/60 text-brand-700 ring-1 ring-black/5',
     arrow: 'text-brand-400 group-interact:text-amber-500',
   },
   dark: {
@@ -33,10 +32,9 @@ const styles = {
     lead: 'text-white/75',
     card: glassCard.dark,
     icon: iconBubble.dark,
-    glow: 'rgba(251,191,36,0.14)',
-    cardTitle: 'text-white',
-    cardText: 'text-white/75',
-    tag: 'bg-white/10 text-white/90 ring-1 ring-white/10',
+    glow: 'rgba(251,191,36,0.10)',
+    text: cardText.dark,
+    tag: 'bg-white/10 text-zinc-200 ring-1 ring-white/10',
     arrow: 'text-white/50 group-interact:text-amber-300',
   },
 }
@@ -45,11 +43,11 @@ export default function ServiciosGrid({ variant = 'light' }: { variant?: 'light'
   const s = styles[variant]
 
   return (
-    <section className="relative isolate overflow-clip py-20 md:py-28">
+    <section className={`relative isolate overflow-clip py-20 md:py-28 ${variant === 'light' ? lightSectionBg : ''}`}>
       {variant === 'light' && (
         <>
-          <div aria-hidden="true" className={`${colorBlobs.amber} -left-24 top-1/3`} />
-          <div aria-hidden="true" className={`${colorBlobs.purple} -right-24 bottom-10`} />
+          <div aria-hidden="true" className={`${colorBlobs.light.amber} -left-24 top-1/3`} />
+          <div aria-hidden="true" className={`${colorBlobs.light.purple} -right-24 bottom-10`} />
         </>
       )}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -73,8 +71,8 @@ export default function ServiciosGrid({ variant = 'light' }: { variant?: 'light'
                   <path d={iconos[servicio.slug]} />
                 </svg>
               </span>
-              <h3 className={`mt-6 text-lg font-medium ${s.cardTitle}`}>{servicio.title}</h3>
-              <p className={`mt-3 text-sm leading-relaxed ${s.cardText}`}>{servicio.desc}</p>
+              <h3 className={`mt-6 ${s.text.title}`}>{servicio.title}</h3>
+              <p className={`mt-3 ${s.text.body}`}>{servicio.desc}</p>
               <span className="mt-auto pt-5 flex items-center justify-between gap-4">
                 <span className="flex flex-wrap gap-2">
                   {servicio.tags.map((tag) => (

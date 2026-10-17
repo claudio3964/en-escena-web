@@ -8,7 +8,7 @@ import MotionLink from '@/components/motion/MotionLink'
 import ParallaxImage from '@/components/motion/ParallaxImage'
 import SpotlightCard from '@/components/motion/SpotlightCard'
 import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal'
-import { glassCard } from '@/lib/cardStyles'
+import { cardText, colorBlobs, glassCard, lightSectionBg } from '@/lib/cardStyles'
 import { getServicio, servicios } from '@/lib/servicios'
 import { site, whatsappUrl } from '@/lib/site'
 
@@ -164,7 +164,9 @@ export default async function ServicioPage({ params }: Props) {
         <MediosDePago />
 
         {/* CTA final */}
-        <section className="py-20 md:py-28 text-center">
+        <section className={`relative isolate overflow-clip py-20 md:py-28 text-center ${lightSectionBg}`}>
+          <div aria-hidden="true" className={`${colorBlobs.light.amber} -left-24 bottom-24`} />
+          <div aria-hidden="true" className={`${colorBlobs.light.purple} -right-28 bottom-0`} />
           <Reveal className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl md:text-5xl font-medium text-brand-900 tracking-tight">
               ¿Arrancamos con tu proyecto?
@@ -185,11 +187,11 @@ export default async function ServicioPage({ params }: Props) {
                 <SpotlightCard
                   key={otro.slug}
                   href={`/servicios/${otro.slug}`}
-                  glow="rgba(245,158,11,0.10)"
+                  glow="rgba(245,158,11,0.08)"
                   className={`p-6 ${glassCard.light}`}
                 >
-                  <h3 className="font-medium text-brand-900">{otro.title}</h3>
-                  <p className="mt-2 text-sm text-brand-500 line-clamp-2">{otro.desc}</p>
+                  <h3 className={cardText.light.title}>{otro.title}</h3>
+                  <p className={`mt-2 line-clamp-2 ${cardText.light.body}`}>{otro.desc}</p>
                 </SpotlightCard>
               ))}
             </div>
