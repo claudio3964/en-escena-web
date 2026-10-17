@@ -8,6 +8,7 @@ import MotionLink from '@/components/motion/MotionLink'
 import ParallaxImage from '@/components/motion/ParallaxImage'
 import SpotlightCard from '@/components/motion/SpotlightCard'
 import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal'
+import { glassCard } from '@/lib/cardStyles'
 import { getServicio, servicios } from '@/lib/servicios'
 import { site, whatsappUrl } from '@/lib/site'
 
@@ -180,13 +181,12 @@ export default async function ServicioPage({ params }: Props) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 text-left">
             <p className="text-sm tracking-[0.2em] uppercase text-brand-400 mb-6">Otros servicios</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {otros.map((otro, index) => (
+              {otros.map((otro) => (
                 <SpotlightCard
                   key={otro.slug}
-                  index={index}
                   href={`/servicios/${otro.slug}`}
-                  glow="rgba(18,18,18,0.06)"
-                  className="p-6 rounded-2xl border border-brand-100 hover:border-brand-300 hover:shadow-lg"
+                  glow="rgba(245,158,11,0.10)"
+                  className={`p-6 ${glassCard.light}`}
                 >
                   <h3 className="font-medium text-brand-900">{otro.title}</h3>
                   <p className="mt-2 text-sm text-brand-500 line-clamp-2">{otro.desc}</p>
