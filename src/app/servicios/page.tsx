@@ -1,37 +1,39 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import Hero from '@/components/Hero'
 import ServiciosGrid from '@/components/ServiciosGrid'
-import Equipo from '@/components/Equipo'
-import ScrollVisual from '@/components/ScrollVisual'
+import MediosDePago from '@/components/MediosDePago'
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: 'Servicios',
+  description: 'Fotografía de producto, sesiones, reels, edición de video, diseño gráfico y marketing digital para marcas que quieren destacar.',
+}
+
+export default function ServiciosPage() {
   return (
     <>
       <Header />
+      <main className="pt-16">
+        <ServiciosGrid />
 
-      <main>
-        <ScrollVisual>
-          <Hero />
+        <MediosDePago />
 
-          <ServiciosGrid />
-
-          <Equipo />
-
-          <div className="min-h-screen flex items-center justify-center">
-            <div className="text-center text-white">
-              <p className="text-sm tracking-[0.2em] uppercase text-white/60">
-                Nuestra mirada
-              </p>
-
-              <h2 className="mt-3 text-3xl md:text-5xl font-medium">
-                Creamos imágenes que cuentan historias
-              </h2>
-            </div>
+        <section className="py-20 md:py-24 bg-brand-900 text-white text-center">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl md:text-4xl font-medium">¿No sabés qué servicio necesitás?</h2>
+            <p className="mt-4 text-white/70">
+              Contanos tu objetivo y armamos una propuesta a medida, combinando lo que tu marca realmente necesita.
+            </p>
+            <Link
+              href="/contacto"
+              className="mt-8 inline-flex items-center px-8 py-3.5 text-base font-medium text-brand-900 bg-white rounded-full hover:bg-white/90 transition-colors"
+            >
+              Pedir propuesta a medida
+            </Link>
           </div>
-        </ScrollVisual>
+        </section>
       </main>
-
       <Footer />
     </>
   )

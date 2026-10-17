@@ -22,14 +22,33 @@ const team = [
   },
 ]
 
-export default function Equipo() {
+const styles = {
+  light: {
+    eyebrow: 'text-brand-400',
+    title: 'text-brand-900',
+    lead: 'text-brand-500',
+    role: 'text-brand-400',
+    text: 'text-brand-500',
+  },
+  dark: {
+    eyebrow: 'text-white/60',
+    title: 'text-white',
+    lead: 'text-white/75',
+    role: 'text-white/60',
+    text: 'text-white/75',
+  },
+}
+
+export default function Equipo({ variant = 'light' }: { variant?: 'light' | 'dark' }) {
+  const s = styles[variant]
+
   return (
     <section className="py-20 md:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <p className="text-sm tracking-[0.2em] uppercase text-brand-400 mb-3">El equipo</p>
-          <h2 className="text-3xl md:text-4xl font-medium text-brand-900">Tres mujeres, una visión</h2>
-          <p className="mt-4 text-brand-500 max-w-2xl mx-auto">
+          <p className={`text-sm tracking-[0.2em] uppercase mb-3 ${s.eyebrow}`}>El equipo</p>
+          <h2 className={`text-3xl md:text-4xl font-medium ${s.title}`}>Tres mujeres, una visión</h2>
+          <p className={`mt-4 max-w-2xl mx-auto ${s.lead}`}>
             Combinamos estrategia, arte y técnica para que tu marca no pase desapercibida.
           </p>
         </div>
@@ -39,9 +58,9 @@ export default function Equipo() {
               <div className={`w-24 h-24 mx-auto rounded-full ${member.initialBg} flex items-center justify-center text-3xl font-medium text-white shadow-lg`}>
                 {member.initial}
               </div>
-              <h3 className="mt-6 text-xl font-medium text-brand-900">{member.name}</h3>
-              <p className="mt-2 text-sm text-brand-400 font-medium tracking-wide">{member.role}</p>
-              <p className="mt-4 text-sm text-brand-500 leading-relaxed max-w-xs mx-auto">
+              <h3 className={`mt-6 text-xl font-medium ${s.title}`}>{member.name}</h3>
+              <p className={`mt-2 text-sm font-medium tracking-wide ${s.role}`}>{member.role}</p>
+              <p className={`mt-4 text-sm leading-relaxed max-w-xs mx-auto ${s.text}`}>
                 {member.desc}
               </p>
             </div>

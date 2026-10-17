@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { servicios } from '@/lib/servicios'
+import { site, whatsappUrl } from '@/lib/site'
 
 export default function Footer() {
   return (
@@ -14,23 +16,36 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-medium mb-4 text-white/80 uppercase tracking-wider">Servicios</h4>
             <ul className="space-y-3 text-sm text-white/60">
-              <li><Link href="/servicios/fotografia-producto" className="hover:text-white transition-colors">Fotografía de producto</Link></li>
-              <li><Link href="/servicios/reels-video" className="hover:text-white transition-colors">Reels y video</Link></li>
-              <li><Link href="/servicios/diseno-grafico" className="hover:text-white transition-colors">Diseño gráfico</Link></li>
-              <li><Link href="/servicios/marketing-digital" className="hover:text-white transition-colors">Marketing digital</Link></li>
+              {servicios.map((servicio) => (
+                <li key={servicio.slug}>
+                  <Link href={`/servicios/${servicio.slug}`} className="hover:text-white transition-colors">
+                    {servicio.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
             <h4 className="text-sm font-medium mb-4 text-white/80 uppercase tracking-wider">Contacto</h4>
             <ul className="space-y-3 text-sm text-white/60">
-              <li>contacto@enescena.uy</li>
               <li>
-                <a href="https://wa.me/598XXXXXXXX" className="hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
-                  WhatsApp
+                <a href={`mailto:${site.email}`} className="hover:text-white transition-colors">
+                  {site.email}
                 </a>
               </li>
               <li>
-                <a href="https://instagram.com/enescena.uy" className="hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
+                {site.whatsapp.enabled ? (
+                  <a href={whatsappUrl()} className="hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
+                    WhatsApp
+                  </a>
+                ) : (
+                  <Link href="/contacto" className="hover:text-white transition-colors">
+                    Formulario de contacto
+                  </Link>
+                )}
+              </li>
+              <li>
+                <a href={site.instagram.url} className="hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
                   Instagram
                 </a>
               </li>

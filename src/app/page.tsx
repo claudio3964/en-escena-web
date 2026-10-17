@@ -4,6 +4,7 @@ import Hero from '@/components/Hero'
 import ServiciosGrid from '@/components/ServiciosGrid'
 import Equipo from '@/components/Equipo'
 import ScrollVisual from '@/components/ScrollVisual'
+import MediosDePago from '@/components/MediosDePago'
 
 export default function Home() {
   return (
@@ -14,9 +15,9 @@ export default function Home() {
         <ScrollVisual>
           <Hero />
 
-          <ServiciosGrid />
+          <ServiciosGrid variant="dark" />
 
-          <Equipo />
+          <Equipo variant="dark" />
 
           <div className="min-h-screen flex items-center justify-center">
             <div className="text-center text-white">
@@ -30,6 +31,8 @@ export default function Home() {
             </div>
           </div>
         </ScrollVisual>
+
+        <MediosDePago />
       </main>
 
       <Footer />
