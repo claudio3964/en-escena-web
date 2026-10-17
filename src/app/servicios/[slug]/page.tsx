@@ -166,6 +166,8 @@ export default async function ServicioPage({ params }: Props) {
 
         <FadeToDark />
         <MediosDePago />
+        {/* La sección siguiente (lightSectionBg) arranca en stone-50 */}
+        <FadeToDark direction="up" from="var(--color-stone-50)" />
 
         {/* CTA final */}
         <section className={`relative isolate overflow-clip py-20 md:py-28 text-center ${lightSectionBg}`}>

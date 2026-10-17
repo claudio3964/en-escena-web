@@ -7,12 +7,25 @@
  * el tramo medio no se vea gris sucio ni haga "escalones", y termina exactamente en
  * #121212 (brand-900) para que no quede costura con la sección siguiente.
  *
- * @param from color exacto con el que termina la sección clara de arriba (por defecto blanco).
- * Si no coincide, se marca una línea en el borde superior del degradado.
+ * @param from color exacto de la sección clara con la que empalma (por defecto blanco).
+ * Si no coincide, se marca una línea en el borde del degradado.
+ * @param direction "down" (claro arriba → oscuro abajo, por defecto) o "up" (oscuro arriba →
+ * claro abajo, para salir de una banda oscura). "up" espeja el mismo degradado y resplandor.
  */
-export default function FadeToDark({ from = '#ffffff', className = '' }: { from?: string; className?: string }) {
+export default function FadeToDark({
+  from = '#ffffff',
+  direction = 'down',
+  className = '',
+}: {
+  from?: string
+  direction?: 'down' | 'up'
+  className?: string
+}) {
   return (
-    <div aria-hidden="true" className={`relative h-56 md:h-72 overflow-clip ${className}`}>
+    <div
+      aria-hidden="true"
+      className={`relative h-56 md:h-72 overflow-clip ${direction === 'up' ? '-scale-y-100' : ''} ${className}`}
+    >
       <div
         className="absolute inset-0"
         style={{

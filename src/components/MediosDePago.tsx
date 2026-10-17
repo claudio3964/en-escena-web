@@ -32,10 +32,11 @@ export default function MediosDePago({ overlay = false }: { overlay?: boolean })
     >
       {!overlay && (
         <>
-          {/* top-32: el blur (≈64px) tiene que disiparse antes del borde superior; si no,
-              overflow-clip lo corta en seco y se marca una línea con la sección anterior */}
+          {/* Las manchas quedan lejos de los bordes (top-32 / bottom-24): el blur (≈64px) tiene
+              que disiparse antes; si no, overflow-clip lo corta en seco y se marca una línea
+              con la sección vecina */}
           <div aria-hidden="true" className={`${colorBlobs.dark.amber} -left-20 top-32`} />
-          <div aria-hidden="true" className={`${colorBlobs.dark.purple} -right-24 -bottom-24`} />
+          <div aria-hidden="true" className={`${colorBlobs.dark.purple} -right-24 bottom-24`} />
         </>
       )}
 
