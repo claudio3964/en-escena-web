@@ -50,6 +50,9 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-video-preview': -1, 'max-snippet': -1 },
   },
   formatDetection: { telephone: false },
+  verification: {
+    google: '_so52SQLsy4N7VapWUVGYRriiUrcsWjlMXV1yrEpMVs',
+  },
 }
 
 export default function RootLayout({
