@@ -21,6 +21,10 @@ export default function Home() {
 
           <Equipo variant="dark" />
 
+          <div className="min-h-screen flex items-center">
+            <MediosDePago overlay />
+          </div>
+
           <div className="min-h-screen flex items-center justify-center px-4">
             <div className="text-center text-white max-w-4xl">
               <Reveal>
@@ -35,8 +39,6 @@ export default function Home() {
             </div>
           </div>
         </ScrollVisual>
-
-        <MediosDePago />
       </main>
 
       <Footer />

@@ -20,19 +20,30 @@ const medios = [
 
 const t = cardText.dark
 
-export default function MediosDePago() {
+/**
+ * @param overlay true cuando la sección va sobre el fondo de fotos de la home (ScrollVisual):
+ * sin fondo propio, el título y las tarjetas de vidrio flotan sobre las imágenes.
+ */
+export default function MediosDePago({ overlay = false }: { overlay?: boolean }) {
   return (
-    <section aria-labelledby="medios-de-pago" className="relative isolate overflow-clip py-20 md:py-28 bg-brand-900">
-      <div aria-hidden="true" className={`${colorBlobs.dark.amber} -left-20 top-10`} />
-      <div aria-hidden="true" className={`${colorBlobs.dark.purple} -right-24 -bottom-24`} />
+    <section
+      aria-labelledby="medios-de-pago"
+      className={`relative isolate overflow-clip w-full py-20 md:py-28 ${overlay ? 'bg-transparent' : 'bg-brand-900'}`}
+    >
+      {!overlay && (
+        <>
+          <div aria-hidden="true" className={`${colorBlobs.dark.amber} -left-20 top-10`} />
+          <div aria-hidden="true" className={`${colorBlobs.dark.purple} -right-24 -bottom-24`} />
+        </>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <p className="text-sm tracking-[0.2em] uppercase text-white/50 mb-3">Medios de pago</p>
+          <p className={`text-sm tracking-[0.2em] uppercase mb-3 ${overlay ? 'text-white/70' : 'text-white/50'}`}>Medios de pago</p>
           <h2 id="medios-de-pago" className="text-3xl md:text-4xl font-medium tracking-tight text-white">
             Pagá como te quede más cómodo
           </h2>
-          <p className="mt-4 text-white/60 max-w-2xl mx-auto">
+          <p className={`mt-4 max-w-2xl mx-auto ${overlay ? 'text-white/80' : 'text-white/60'}`}>
             Presupuesto cerrado, sin sorpresas. Coordinamos el pago al confirmar la propuesta.
           </p>
         </div>
