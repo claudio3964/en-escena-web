@@ -18,16 +18,18 @@ export const fadeUp: Variants = {
 }
 
 /**
- * Entrada al hacer scroll para tarjetas interactivas. Cada tarjeta maneja su propio
- * whileInView (en vez de heredar variantes del contenedor), así ningún gesto puede
- * devolverla al estado oculto. El escalonado se logra con el delay por índice.
+ * Variantes de entrada para tarjetas interactivas. Cada tarjeta decide su propio estado
+ * con useReveal (no hereda variantes del contenedor ni depende de gestos), y una vez
+ * en "show" no vuelve a "hidden". El escalonado se logra con el delay por índice.
  */
-export const cardReveal = (index = 0, gap = 0.08) => ({
-  initial: { opacity: 0, y: 32 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.15 },
-  // index % 3: el escalonado sigue las columnas de la grilla, en mobile no acumula espera
-  transition: { duration: 0.9, ease: easeOutExpo, delay: (index % 3) * gap },
+export const cardVariants = (index = 0, gap = 0.08): Variants => ({
+  hidden: { opacity: 0, y: 32 },
+  show: {
+    opacity: 1,
+    y: 0,
+    // index % 3: el escalonado sigue las columnas de la grilla, en mobile no acumula espera
+    transition: { duration: 0.9, ease: easeOutExpo, delay: (index % 3) * gap },
+  },
 })
 
 /** Hover/press de tarjetas en CSS: en Tailwind 4 translate y scale son propiedades

@@ -1,8 +1,10 @@
 'use client'
 
+import { useRef } from 'react'
 import Link from 'next/link'
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion'
-import { cardHoverClass, cardReveal } from '@/lib/motion'
+import { cardHoverClass, cardVariants } from '@/lib/motion'
+import { useReveal } from '@/components/motion/useReveal'
 
 const MotionNextLink = motion.create(Link)
 
@@ -25,6 +27,8 @@ export default function SpotlightCard({
   children,
   ...props
 }: SpotlightCardProps) {
+  const ref = useRef<HTMLAnchorElement>(null)
+  const revealed = useReveal(ref)
   const mouseX = useMotionValue(-999)
   const mouseY = useMotionValue(-999)
   const background = useMotionTemplate`radial-gradient(420px circle at ${mouseX}px ${mouseY}px, ${glow}, transparent 70%)`
@@ -39,7 +43,11 @@ export default function SpotlightCard({
   return (
     <MotionNextLink
       {...props}
-      {...cardReveal(index)}
+      ref={ref}
+      data-reveal=""
+      variants={cardVariants(index)}
+      initial="hidden"
+      animate={revealed ? 'show' : 'hidden'}
       onPointerMove={handleMove}
       className={`group relative overflow-hidden ${cardHoverClass} ${className ?? ''}`}
     >

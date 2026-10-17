@@ -38,6 +38,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="min-h-screen flex flex-col bg-white">
+        {/* Sin JavaScript, las tarjetas animadas no deben quedar en su estado inicial (opacity 0) */}
+        <noscript>
+          <style>{'[data-reveal]{opacity:1!important;transform:none!important}'}</style>
+        </noscript>
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>

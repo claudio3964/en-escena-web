@@ -1,7 +1,9 @@
 'use client'
 
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
-import { cardHoverClass, cardReveal } from '@/lib/motion'
+import { cardHoverClass, cardVariants } from '@/lib/motion'
+import { useReveal } from '@/components/motion/useReveal'
 
 const medios = [
   {
@@ -43,22 +45,34 @@ export default function MediosDePago() {
 
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {medios.map((medio, index) => (
-            <motion.li
-              key={medio.title}
-              {...cardReveal(index, 0.12)}
-              className={`group p-8 bg-white rounded-2xl border border-brand-100 hover:border-brand-300 hover:shadow-xl ${cardHoverClass}`}
-            >
-              <div className="w-12 h-12 rounded-full bg-brand-900 text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" aria-hidden="true">
-                  {medio.icon}
-                </svg>
-              </div>
-              <h3 className="mt-6 text-lg font-medium text-brand-900">{medio.title}</h3>
-              <p className="mt-2 text-sm text-brand-500 leading-relaxed">{medio.desc}</p>
-            </motion.li>
+            <MedioCard key={medio.title} medio={medio} index={index} />
           ))}
         </ul>
       </div>
     </section>
+  )
+}
+
+function MedioCard({ medio, index }: { medio: (typeof medios)[number]; index: number }) {
+  const ref = useRef<HTMLLIElement>(null)
+  const revealed = useReveal(ref)
+
+  return (
+    <motion.li
+      ref={ref}
+      data-reveal=""
+      variants={cardVariants(index, 0.12)}
+      initial="hidden"
+      animate={revealed ? 'show' : 'hidden'}
+      className={`group p-8 bg-white rounded-2xl border border-brand-100 hover:border-brand-300 hover:shadow-xl ${cardHoverClass}`}
+    >
+      <div className="w-12 h-12 rounded-full bg-brand-900 text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" aria-hidden="true">
+          {medio.icon}
+        </svg>
+      </div>
+      <h3 className="mt-6 text-lg font-medium text-brand-900">{medio.title}</h3>
+      <p className="mt-2 text-sm text-brand-500 leading-relaxed">{medio.desc}</p>
+    </motion.li>
   )
 }
