@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Header from '@/components/Header'
@@ -24,11 +25,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const servicio = getServicio((await params).slug)
   if (!servicio) return {}
 
-  return {
-    title: servicio.title,
+  return pageMetadata({
+    title: `${servicio.title} en Uruguay`,
     description: servicio.desc,
-    openGraph: { title: `${servicio.title} | En Escena`, description: servicio.desc, images: [servicio.image] },
-  }
+    path: `/servicios/${servicio.slug}`,
+    defaultImage: false,
+  })
 }
 
 export default async function ServicioPage({ params }: Props) {

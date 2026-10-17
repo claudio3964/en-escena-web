@@ -6,9 +6,21 @@ const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || WHATSAPP_OFIC
 
 export const WHATSAPP_MENSAJE = '¡Hola En Escena! Quisiera pedir un presupuesto para mi proyecto.'
 
+/**
+ * URL pública del sitio, para sitemap, robots, canonical y OpenGraph.
+ * Prioridad: NEXT_PUBLIC_SITE_URL > dominio de producción que Vercel inyecta en el build
+ * (VERCEL_PROJECT_PRODUCTION_URL) > dominio de la marca.
+ */
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
+  'https://enescena.uy'
+).replace(/\/$/, '')
+
 export const site = {
   name: 'En Escena',
-  email: 'contacto@enescena.uy',
+  tagline: 'Agencia audiovisual y estudio creativo en Uruguay',
+  email: 'enescena.estudiocreativo@gmail.com',
   instagram: {
     handle: '@enescena.uy',
     url: 'https://instagram.com/enescena.uy',

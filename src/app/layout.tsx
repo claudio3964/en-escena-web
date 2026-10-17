@@ -2,33 +2,54 @@ import type { Metadata } from 'next'
 import './globals.css'
 import MotionProvider from '@/components/motion/MotionProvider'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import { site, siteUrl } from '@/lib/site'
+
+const description =
+  'Agencia audiovisual y estudio creativo en Uruguay. Producción de video, reels, fotografía, diseño gráfico y gestión de redes para marcas que quieren destacar.'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://enescena.uy'),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: 'En Escena | Marketing Digital, Fotografía y Video',
+    default: 'Agencia Audiovisual en Uruguay | En Escena Estudio Creativo',
     template: '%s | En Escena',
   },
-  description: 'Agencia creativa uruguaya especializada en marketing digital, fotografía de producto, video, reels, diseño gráfico y dirección de arte.',
-  keywords: ['marketing digital', 'fotografía', 'video', 'reels', 'diseño gráfico', 'dirección de arte', 'Uruguay', 'agencia creativa'],
-  authors: [{ name: 'En Escena' }],
+  description,
+  applicationName: site.name,
+  keywords: [
+    'agencia audiovisual Uruguay',
+    'producción de video',
+    'estudio creativo',
+    'gestión de redes',
+    'producción audiovisual Uruguay',
+    'reels para empresas',
+    'fotografía de producto',
+    'diseño gráfico',
+    'marketing digital Uruguay',
+  ],
+  authors: [{ name: site.name, url: siteUrl }],
+  creator: site.name,
+  publisher: site.name,
+  category: 'Producción audiovisual',
+  alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     locale: 'es_UY',
-    url: 'https://enescena.uy',
-    siteName: 'En Escena',
-    title: 'En Escena | Marketing Digital, Fotografía y Video',
-    description: 'Agencia creativa uruguaya especializada en marketing digital, fotografía de producto, video, reels y diseño gráfico.',
+    url: '/',
+    siteName: site.name,
+    title: 'Agencia Audiovisual en Uruguay | En Escena Estudio Creativo',
+    description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'En Escena | Marketing Digital, Fotografía y Video',
-    description: 'Agencia creativa uruguaya especializada en marketing digital, fotografía de producto, video, reels y diseño gráfico.',
+    title: 'Agencia Audiovisual en Uruguay | En Escena Estudio Creativo',
+    description,
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-video-preview': -1, 'max-snippet': -1 },
   },
+  formatDetection: { telephone: false },
 }
 
 export default function RootLayout({

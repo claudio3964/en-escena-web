@@ -1,11 +1,14 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Blog',
-  description: 'Tips, tendencias y guías sobre fotografía, video, diseño gráfico y marketing digital.',
-}
+export const metadata: Metadata = pageMetadata({
+  title: 'Blog de Video, Fotografía y Redes Sociales',
+  description:
+    'Ideas, tendencias y guías prácticas sobre producción de video, fotografía, diseño y gestión de redes para marcas en Uruguay.',
+  path: '/blog',
+})
 
 const posts = [
   {

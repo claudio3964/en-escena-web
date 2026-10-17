@@ -7,10 +7,13 @@ import ScrollVisual from '@/components/ScrollVisual'
 import MediosDePago from '@/components/MediosDePago'
 import { Reveal } from '@/components/motion/Reveal'
 import ScrollText from '@/components/motion/ScrollText'
+import JsonLd from '@/components/JsonLd'
+import { homeSchema } from '@/lib/schema'
 
 export default function Home() {
   return (
     <>
+      <JsonLd data={homeSchema()} />
       <Header overlay />
 
       <main>

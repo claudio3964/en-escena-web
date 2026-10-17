@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ContactForm from '@/components/ContactForm'
@@ -7,10 +8,12 @@ import { getServicio } from '@/lib/servicios'
 import { site, whatsappDisplay, whatsappUrl } from '@/lib/site'
 import { Reveal } from '@/components/motion/Reveal'
 
-export const metadata: Metadata = {
-  title: 'Contacto',
-  description: 'Contanos tu proyecto y te respondemos en menos de 24 horas con un presupuesto sin compromiso.',
-}
+export const metadata: Metadata = pageMetadata({
+  title: 'Contacto: Pedí tu Presupuesto',
+  description:
+    'Contale tu proyecto a En Escena y recibí un presupuesto sin compromiso en menos de 24 horas. Escribinos por WhatsApp o por el formulario.',
+  path: '/contacto',
+})
 
 export default async function ContactoPage({
   searchParams,

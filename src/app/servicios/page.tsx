@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ServiciosGrid from '@/components/ServiciosGrid'
@@ -6,10 +7,12 @@ import MediosDePago from '@/components/MediosDePago'
 import MotionLink from '@/components/motion/MotionLink'
 import { Reveal } from '@/components/motion/Reveal'
 
-export const metadata: Metadata = {
-  title: 'Servicios',
-  description: 'Fotografía de producto, sesiones, reels, edición de video, diseño gráfico y marketing digital para marcas que quieren destacar.',
-}
+export const metadata: Metadata = pageMetadata({
+  title: 'Producción de Video, Fotos y Gestión de Redes',
+  description:
+    'Servicios de En Escena, estudio creativo en Uruguay: producción de video y reels, fotografía de producto, edición, diseño gráfico y gestión de redes sociales.',
+  path: '/servicios',
+})
 
 export default function ServiciosPage() {
   return (

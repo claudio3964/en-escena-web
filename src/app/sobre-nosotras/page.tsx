@@ -2,12 +2,15 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Equipo from '@/components/Equipo'
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal'
 
-export const metadata: Metadata = {
-  title: 'Sobre nosotras',
-  description: 'Conocé al equipo de En Escena: Tamara, Camilla y Jamyla. Especialistas en marketing, fotografía, video y diseño gráfico en Uruguay.',
-}
+export const metadata: Metadata = pageMetadata({
+  title: 'Nosotras: el Estudio Creativo',
+  description:
+    'Conocé a Tamara, Camilla y Jamyla: el equipo de En Escena, agencia audiovisual uruguaya de video, fotografía, diseño y marketing digital.',
+  path: '/sobre-nosotras',
+})
 
 export default function SobreNosotrasPage() {
   return (

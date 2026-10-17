@@ -1,14 +1,17 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import PortfolioGallery from '@/components/PortfolioGallery'
 import MotionLink from '@/components/motion/MotionLink'
 import { Reveal } from '@/components/motion/Reveal'
 
-export const metadata: Metadata = {
-  title: 'Portfolio',
-  description: 'Trabajos de fotografía, video y diseño de En Escena para marcas que quieren destacar.',
-}
+export const metadata: Metadata = pageMetadata({
+  title: 'Portfolio de Producción Audiovisual',
+  description:
+    'Trabajos de video, fotografía y diseño de En Escena, agencia audiovisual en Uruguay. Mirá cómo contamos la historia de cada marca.',
+  path: '/portfolio',
+})
 
 export default function PortfolioPage() {
   return (
