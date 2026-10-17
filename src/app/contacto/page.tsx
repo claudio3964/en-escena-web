@@ -5,6 +5,7 @@ import ContactForm from '@/components/ContactForm'
 import MediosDePago from '@/components/MediosDePago'
 import { getServicio } from '@/lib/servicios'
 import { site, whatsappDisplay, whatsappUrl } from '@/lib/site'
+import { Reveal } from '@/components/motion/Reveal'
 
 export const metadata: Metadata = {
   title: 'Contacto',
@@ -25,7 +26,7 @@ export default async function ContactoPage({
       <main className="pt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <div>
+            <Reveal>
               <p className="text-sm tracking-[0.2em] uppercase text-brand-400 mb-3">Contacto</p>
               <h1 className="text-3xl md:text-4xl font-medium text-brand-900">Hablemos de tu proyecto</h1>
               <p className="mt-4 text-brand-500 leading-relaxed">
@@ -76,11 +77,11 @@ export default async function ContactoPage({
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
-            <div>
+            <Reveal delay={0.15}>
               <ContactForm defaultServicio={defaultServicio} />
-            </div>
+            </Reveal>
           </div>
         </div>
         <MediosDePago />

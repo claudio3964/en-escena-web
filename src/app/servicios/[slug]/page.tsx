@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import MediosDePago from '@/components/MediosDePago'
+import MotionLink from '@/components/motion/MotionLink'
+import ParallaxImage from '@/components/motion/ParallaxImage'
+import SpotlightCard from '@/components/motion/SpotlightCard'
+import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal'
 import { getServicio, servicios } from '@/lib/servicios'
 import { site, whatsappUrl } from '@/lib/site'
 
@@ -36,29 +39,35 @@ export default async function ServicioPage({ params }: Props) {
 
   return (
     <>
-      <Header />
+      <Header overlay />
       <main>
         {/* Hero */}
         <section className="relative min-h-[80vh] flex items-end overflow-hidden">
-          <Image src={servicio.image} alt="" fill priority sizes="100vw" className="object-cover" />
+          <ParallaxImage src={servicio.image} />
           <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/45 to-black/30" />
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-32">
+          <Stagger gap={0.12} delay={0.2} className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-32">
+            <StaggerItem>
             <nav aria-label="Ruta" className="text-sm text-white/60 mb-6">
               <Link href="/servicios" className="hover:text-white transition-colors">Servicios</Link>
               <span className="mx-2">/</span>
               <span className="text-white/90">{servicio.title}</span>
             </nav>
+            </StaggerItem>
+            <StaggerItem>
             <h1 className="text-4xl md:text-6xl font-medium text-white tracking-tight max-w-3xl">
               {servicio.headline}
             </h1>
+            </StaggerItem>
+            <StaggerItem>
             <p className="mt-6 text-lg text-white/75 max-w-2xl leading-relaxed">{servicio.intro}</p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
+            </StaggerItem>
+            <StaggerItem className="mt-10 flex flex-wrap gap-4">
+              <MotionLink
                 href={contactoHref}
                 className="inline-flex items-center px-8 py-3.5 text-base font-medium text-brand-900 bg-white rounded-full hover:bg-white/90 transition-colors"
               >
                 Pedir presupuesto
-              </Link>
+              </MotionLink>
               {site.whatsapp.enabled && (
                 <a
                   href={whatsappUrl(`Hola En Escena! Quiero consultar por ${servicio.title.toLowerCase()}.`)}
@@ -69,33 +78,35 @@ export default async function ServicioPage({ params }: Props) {
                   Consultar por WhatsApp
                 </a>
               )}
-            </div>
-          </div>
+            </StaggerItem>
+          </Stagger>
         </section>
 
         {/* Beneficios */}
         <section className="py-20 md:py-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Reveal>
             <p className="text-sm tracking-[0.2em] uppercase text-brand-400 mb-3">Por qué funciona</p>
             <h2 className="text-3xl md:text-4xl font-medium text-brand-900 max-w-2xl">
               Lo que gana tu marca
             </h2>
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+            </Reveal>
+            <Stagger gap={0.12} className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-10">
               {servicio.beneficios.map((beneficio, i) => (
-                <div key={beneficio.title} className="border-t border-brand-200 pt-6">
+                <StaggerItem key={beneficio.title} className="border-t border-brand-200 pt-6">
                   <span className="text-sm text-brand-400">0{i + 1}</span>
                   <h3 className="mt-3 text-xl font-medium text-brand-900">{beneficio.title}</h3>
                   <p className="mt-3 text-brand-500 leading-relaxed">{beneficio.desc}</p>
-                </div>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
           </div>
         </section>
 
         {/* Qué incluye + proceso */}
         <section className="py-20 md:py-28 bg-brand-900 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <div>
+            <Reveal>
               <p className="text-sm tracking-[0.2em] uppercase text-white/50 mb-3">Qué incluye</p>
               <h2 className="text-3xl md:text-4xl font-medium">Todo resuelto, de principio a fin</h2>
               <ul className="mt-10 space-y-4">
@@ -108,8 +119,8 @@ export default async function ServicioPage({ params }: Props) {
                   </li>
                 ))}
               </ul>
-            </div>
-            <div>
+            </Reveal>
+            <Reveal delay={0.15}>
               <p className="text-sm tracking-[0.2em] uppercase text-white/50 mb-3">Cómo trabajamos</p>
               <ol className="mt-10 space-y-8">
                 {servicio.proceso.map((paso, i) => (
@@ -124,16 +135,18 @@ export default async function ServicioPage({ params }: Props) {
                   </li>
                 ))}
               </ol>
-            </div>
+            </Reveal>
           </div>
         </section>
 
         {/* FAQ */}
         <section className="py-20 md:py-28">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Reveal>
             <p className="text-sm tracking-[0.2em] uppercase text-brand-400 mb-3 text-center">Preguntas frecuentes</p>
             <h2 className="text-3xl md:text-4xl font-medium text-brand-900 text-center">Antes de empezar</h2>
-            <div className="mt-12 divide-y divide-brand-100 border-y border-brand-100">
+            </Reveal>
+            <Reveal delay={0.1} className="mt-12 divide-y divide-brand-100 border-y border-brand-100">
               {servicio.faqs.map((faq) => (
                 <details key={faq.q} className="group py-6">
                   <summary className="flex items-center justify-between gap-6 cursor-pointer list-none text-lg font-medium text-brand-900">
@@ -143,7 +156,7 @@ export default async function ServicioPage({ params }: Props) {
                   <p className="mt-4 text-brand-500 leading-relaxed">{faq.a}</p>
                 </details>
               ))}
-            </div>
+            </Reveal>
           </div>
         </section>
 
@@ -151,33 +164,34 @@ export default async function ServicioPage({ params }: Props) {
 
         {/* CTA final */}
         <section className="py-20 md:py-28 text-center">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Reveal className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl md:text-5xl font-medium text-brand-900 tracking-tight">
               ¿Arrancamos con tu proyecto?
             </h2>
             <p className="mt-4 text-brand-500">Te respondemos en menos de 24 horas con un presupuesto sin compromiso.</p>
-            <Link
+            <MotionLink
               href={contactoHref}
               className="mt-8 inline-flex items-center px-8 py-3.5 text-base font-medium text-white bg-brand-900 rounded-full hover:bg-brand-700 transition-colors"
             >
               Pedir presupuesto
-            </Link>
-          </div>
+            </MotionLink>
+          </Reveal>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 text-left">
             <p className="text-sm tracking-[0.2em] uppercase text-brand-400 mb-6">Otros servicios</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Stagger gap={0.08} className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {otros.map((otro) => (
-                <Link
+                <SpotlightCard
                   key={otro.slug}
                   href={`/servicios/${otro.slug}`}
-                  className="group p-6 rounded-2xl border border-brand-100 hover:border-brand-300 hover:shadow-lg transition-all duration-300"
+                  glow="rgba(18,18,18,0.06)"
+                  className="p-6 rounded-2xl border border-brand-100 hover:border-brand-300 hover:shadow-lg transition-[border-color,box-shadow] duration-300"
                 >
                   <h3 className="font-medium text-brand-900">{otro.title}</h3>
                   <p className="mt-2 text-sm text-brand-500 line-clamp-2">{otro.desc}</p>
-                </Link>
+                </SpotlightCard>
               ))}
-            </div>
+            </Stagger>
           </div>
         </section>
       </main>

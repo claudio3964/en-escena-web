@@ -1,3 +1,5 @@
+import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal'
+
 const team = [
   {
     name: 'Tamara',
@@ -45,17 +47,17 @@ export default function Equipo({ variant = 'light' }: { variant?: 'light' | 'dar
   return (
     <section className="py-20 md:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <Reveal className="text-center mb-16">
           <p className={`text-sm tracking-[0.2em] uppercase mb-3 ${s.eyebrow}`}>El equipo</p>
           <h2 className={`text-3xl md:text-4xl font-medium ${s.title}`}>Tres mujeres, una visión</h2>
           <p className={`mt-4 max-w-2xl mx-auto ${s.lead}`}>
             Combinamos estrategia, arte y técnica para que tu marca no pase desapercibida.
           </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        </Reveal>
+        <Stagger gap={0.12} className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {team.map((member) => (
-            <div key={member.name} className="text-center">
-              <div className={`w-24 h-24 mx-auto rounded-full ${member.initialBg} flex items-center justify-center text-3xl font-medium text-white shadow-lg`}>
+            <StaggerItem key={member.name} className="group text-center">
+              <div className={`w-24 h-24 mx-auto rounded-full ${member.initialBg} flex items-center justify-center text-3xl font-medium text-white shadow-lg ring-1 ring-white/0 ring-offset-4 ring-offset-transparent transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-hover:ring-white/40`}>
                 {member.initial}
               </div>
               <h3 className={`mt-6 text-xl font-medium ${s.title}`}>{member.name}</h3>
@@ -63,9 +65,9 @@ export default function Equipo({ variant = 'light' }: { variant?: 'light' | 'dar
               <p className={`mt-4 text-sm leading-relaxed max-w-xs mx-auto ${s.text}`}>
                 {member.desc}
               </p>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
     </section>
   )
