@@ -1,8 +1,24 @@
 import type { Metadata } from 'next'
+import { Instrument_Serif, Inter } from 'next/font/google'
 import './globals.css'
 import MotionProvider from '@/components/motion/MotionProvider'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import { site, siteUrl } from '@/lib/site'
+
+// Tipografía de la marca, autoalojada por next/font (sin pedidos a Google en runtime).
+// next/font ajusta las métricas de la fuente de respaldo, así el texto no salta al cargar.
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-instrument-serif',
+  display: 'swap',
+})
 
 const description =
   'Agencia audiovisual y estudio creativo en Uruguay. Producción de video, reels, fotografía, diseño gráfico y gestión de redes para marcas que quieren destacar.'
@@ -61,8 +77,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es">
-      <body className="min-h-screen flex flex-col bg-white">
+    <html lang="es" className={`${inter.variable} ${instrumentSerif.variable}`}>
+      <body className="min-h-screen flex flex-col bg-white font-sans">
         <MotionProvider>
           {children}
           <WhatsAppButton />

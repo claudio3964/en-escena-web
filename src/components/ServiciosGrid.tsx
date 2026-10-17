@@ -39,7 +39,17 @@ const styles = {
   },
 }
 
-export default function ServiciosGrid({ variant = 'light' }: { variant?: 'light' | 'dark' }) {
+/**
+ * @param headingAs nivel del título: "h1" cuando la grilla es el contenido principal
+ * de la página (/servicios), "h2" cuando es una sección más (home).
+ */
+export default function ServiciosGrid({
+  variant = 'light',
+  headingAs: Heading = 'h2',
+}: {
+  variant?: 'light' | 'dark'
+  headingAs?: 'h1' | 'h2'
+}) {
   const s = styles[variant]
 
   return (
@@ -53,7 +63,7 @@ export default function ServiciosGrid({ variant = 'light' }: { variant?: 'light'
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center mb-16">
           <p className={`text-sm tracking-[0.2em] uppercase mb-3 ${s.eyebrow}`}>Qué hacemos</p>
-          <h2 className={`text-3xl md:text-4xl font-medium ${s.title}`}>Servicios que impulsan tu marca</h2>
+          <Heading className={`text-3xl md:text-4xl font-medium ${s.title}`}>Servicios que impulsan tu marca</Heading>
           <p className={`mt-4 max-w-2xl mx-auto ${s.lead}`}>
             Cada proyecto es una oportunidad de crear algo extraordinario. Elegí el servicio que necesitás o armamos un paquete a medida.
           </p>

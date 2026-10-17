@@ -19,7 +19,7 @@ export default function ServiciosPage() {
     <>
       <Header />
       <main className="pt-16">
-        <ServiciosGrid />
+        <ServiciosGrid headingAs="h1" />
 
         <MediosDePago />
 

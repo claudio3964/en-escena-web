@@ -1,7 +1,13 @@
 @import 'tailwindcss';
 
+/* Fuentes de la marca: las variables --font-inter e --font-instrument-serif las define next/font
+   en <html>. "inline" hace que las utilidades usen var() directo, sin copiarlo en :root. */
+@theme inline {
+  --font-sans: var(--font-inter), system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: var(--font-instrument-serif), Georgia, 'Times New Roman', serif;
+}
+
 @theme {
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   --color-brand-50: #f5f5f5;
   --color-brand-100: #e0e0e0;
@@ -61,6 +67,15 @@
 }
 
 @layer base {
+  /* Títulos y citas en la serif editorial. Instrument Serif tiene un solo peso (400):
+     se fija para que font-medium no pida un peso inexistente. */
+  h1,
+  h2,
+  blockquote {
+    font-family: var(--font-display);
+    font-weight: 400;
+  }
+
   /* Tailwind 4 quitó cursor: pointer por defecto en botones */
   button:not(:disabled),
   [role='button']:not(:disabled) {
@@ -70,6 +85,18 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Ajustes ópticos de la serif display. Va fuera de @layer a propósito, para ganarle a las
+   utilidades tracking-* de los títulos: Instrument Serif es angosta y con tracking negativo
+   las letras se pegan. font-size-adjust la agranda ~10% (x-height 0.51 → 0.56) de forma
+   pareja en la fuente final y en la de respaldo, sin provocar layout shift. */
+h1,
+h2,
+blockquote,
+.font-display {
+  letter-spacing: 0;
+  font-size-adjust: 0.56;
 }
 
 /* Entrada de tarjetas ligada al scroll, 100% CSS: no depende de JavaScript ni de eventos.

@@ -120,7 +120,7 @@ export default async function BlogPostPage({ params }: Props) {
             ))}
 
             {/* Llamado a la acción */}
-            <aside className={`mt-16 p-8 md:p-10 text-center ${glassCard.dark} bg-brand-900/95`}>
+            <aside className="mt-16 p-8 md:p-10 text-center rounded-2xl border border-white/10 bg-brand-900 ring-1 ring-white/5 inset-shadow-[0_1px_0_0_rgb(255_255_255/0.08)] shadow-2xl shadow-black/15">
               <p className="text-sm tracking-[0.2em] uppercase text-white/50">En Escena</p>
               <p className="mt-3 text-2xl font-medium tracking-tight text-white">¿Querés aplicar esto a tu marca?</p>
               <p className={`mt-3 ${cardText.dark.body}`}>Contanos tu proyecto y te enviamos una propuesta en menos de 24 horas.</p>

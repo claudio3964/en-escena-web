@@ -54,7 +54,7 @@ export default function Header({ overlay = false }: { overlay?: boolean }) {
         <div className="flex items-center justify-between h-16">
           <Link
             href="/"
-            className={`text-lg font-medium tracking-tight transition-colors duration-500 ${solid ? 'text-brand-900' : 'text-white'}`}
+            className={`font-display text-2xl tracking-tight transition-colors duration-500 ${solid ? 'text-brand-900' : 'text-white'}`}
           >
             En Escena
           </Link>
