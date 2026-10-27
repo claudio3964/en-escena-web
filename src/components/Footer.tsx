@@ -29,7 +29,7 @@ export default function Footer() {
             <h4 className="text-sm font-medium mb-4 text-white/80 uppercase tracking-wider">Contacto</h4>
             <ul className="space-y-3 text-sm text-white/60">
               <li>
-                <a href={`mailto:${site.email}`} className="hover:text-white transition-colors">
+                <a href={`mailto:${site.email}`} className="break-all hover:text-white transition-colors">
                   {site.email}
                 </a>
               </li>

@@ -83,11 +83,13 @@ export default function Header({ overlay = false }: { overlay?: boolean }) {
 
           <MotionLink
             href="/contacto"
-            className={`hidden md:inline-flex items-center px-5 py-2 text-sm font-medium rounded-full transition-colors duration-500 ${
+            className={`hidden md:inline-flex items-center whitespace-nowrap px-5 py-2 text-sm font-medium rounded-full transition-colors duration-500 ${
               solid ? 'text-white bg-brand-900 hover:bg-brand-700' : 'text-brand-900 bg-white hover:bg-white/90'
             }`}
           >
-            Contratar
+            {/* En tablet el menú ocupa casi todo el ancho: la versión corta evita que se pisen */}
+            <span className="lg:hidden">Presupuesto</span>
+            <span className="hidden lg:inline">Pedir presupuesto</span>
           </MotionLink>
 
           <button
@@ -151,7 +153,7 @@ export default function Header({ overlay = false }: { overlay?: boolean }) {
                   className="mt-3 flex items-center justify-center px-5 py-3 text-sm font-medium text-white bg-brand-900 rounded-full active:scale-[0.98] transition-transform"
                   onClick={() => setMobileOpen(false)}
                 >
-                  Contratar
+                  Pedir presupuesto
                 </Link>
               </motion.div>
             </motion.nav>

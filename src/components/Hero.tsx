@@ -71,17 +71,17 @@ export default function Hero() {
 
         <motion.div variants={rise} className="mt-10 flex flex-wrap justify-center gap-4">
           <MotionLink
-            href="/servicios"
+            href="/contacto"
             className="inline-flex items-center px-8 py-3.5 text-base font-medium text-brand-900 bg-white rounded-full hover:bg-white/90 transition-colors"
           >
-            Ver servicios
+            Pedir presupuesto
           </MotionLink>
 
           <MotionLink
-            href="/contacto"
+            href="/servicios"
             className="inline-flex items-center px-8 py-3.5 text-base font-medium text-white border border-white/30 rounded-full hover:bg-white/10 transition-colors"
           >
-            Solicitar presupuesto
+            Ver servicios
           </MotionLink>
         </motion.div>
       </motion.div>
